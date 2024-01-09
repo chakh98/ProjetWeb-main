@@ -1,3 +1,4 @@
-export * from './member-plan.entity';
-export * from './member.entity';
-export * from './member-subscription.entity';
+export * from './commentaire.entity';
+export * from './Like.entity';
+export * from './publication.entity';
+export * from './profil.entity';

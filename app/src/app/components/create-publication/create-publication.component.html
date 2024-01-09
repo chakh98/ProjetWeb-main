@@ -1,0 +1,12 @@
+<form (submit)="createPublication()">
+  <input type="text" #content placeholder="Écrit ici?">
+  <button type="poster">Post</button>
+</form>
+<div *ngFor="let comment of comments" class="commente">
+  {{ comment }}
+</div>
+<form (submit)="addComment(commentText.value)">
+  <input type="text" #commentText placeholder="Ajoute un commentaire">
+  <button type="poster">Comment</button>
+
+</form>

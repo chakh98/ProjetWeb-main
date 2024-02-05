@@ -4,7 +4,7 @@ import {Like} from "../model/entity";
 import {Repository} from "typeorm";
 import {Builder} from "builder-pattern";
 import {
-    LikeCreateException, LikeListException, LikeNotFoundException, LikeDeleteException
+    LikeCreateException, LikeListException, LikeNotFoundException, LikeDeleteException, PublicationNotFoundException
 } from "../profil.exception";
 import {isNil} from "lodash";
 import {LikeCreatePayload} from "../model/payload/Like-create.payload";
@@ -63,6 +63,18 @@ export class LikeService {
         } catch (e) {
             throw new LikeListException();
         }
+    }
+    async getLastLikeDate(userId: string): Promise<Date> {
+        const lastPublication = await this.repository.findOne({
+            where: { credential_id: userId },
+            order: { created: 'DESC' }
+        });
+
+        if (!lastPublication) {
+            throw new PublicationNotFoundException();
+        }
+
+        return lastPublication.created;
     }
 
 }

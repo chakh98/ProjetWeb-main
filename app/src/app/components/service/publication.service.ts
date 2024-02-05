@@ -7,6 +7,7 @@ import { ApiResponse } from "@shared";
 import {PublicationCreatePayload} from "../payload/create-publication.payload";
 import {ApiService} from "../../shared/api/service/api.service";
 import { ApiResponseProperty } from "@nestjs/swagger";
+import { DateDto } from "../dto/date.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class PublicationService {
   list$:WritableSignal<PublicationDto[]> = signal([]);
 
   publicationUsername$:WritableSignal<CredentialDto> = signal({username: ""});
+  getdate$:WritableSignal<DateDto> = signal({data: ""});
 
   public publicationCreate(payload: PublicationCreatePayload): Observable<any> {
     return this.api.post(ApiURI.PUBLICATION_CREATE, payload);
@@ -30,7 +32,11 @@ export class PublicationService {
       console.log(response);
     })).subscribe()
   }
-
+  public datelastpublication():void {
+    this.api.get(ApiURI.DATE_PUBLICATION).pipe(tap((response:ApiResponse)=>{
+      this.getdate$.set(response.data);
+    })).subscribe();
+  }
   public publicationDetail():void {
     this.api.get(ApiURI.PUBLICATION_DETAIL).pipe(tap((response:ApiResponse)=>{
       this.publicationUsername$.set(response.data);

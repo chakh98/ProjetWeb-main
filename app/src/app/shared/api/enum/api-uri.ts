@@ -16,9 +16,11 @@ export enum ApiURI{
   COUNT_P = 'publication/count-p',
   COUNT_C = 'commentaire/count-c',
   DATE_PUBLICATION = 'publication/last-publication-date',
-  DATE_COMMENTAIRE = 'last-comment-date',
+  DATE_COMMENTAIRE = 'commentaire/last-comment-date',
+  DATE_LIKE = 'like/last-like-date',
   LIKE_CREATE = 'like',
-  LIKE_PUBLICATION_LIST = 'like/list/:idPublication'
+  LIKE_PUBLICATION_LIST = 'Like/list/:idPublication',
+
 
 
 }

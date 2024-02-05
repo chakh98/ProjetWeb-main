@@ -12,11 +12,17 @@ import {
 import {RefreshTokenPayload, SignInPayload, SignupPayload, Credential, Token} from "../model";
 import {comparePassword, encryptPassword} from "../utils/password.encoder";
 import {Builder} from "builder-pattern";
+import { ProfilCreatePayload } from "../../module/model/payload/profil-create.payload";
+import { ProfilService } from "../../module/service/profil.service";
 
 @Injectable()
 export class SecurityService {
+
+
     constructor(@InjectRepository(Credential) private readonly repository: Repository<Credential>,
+                private readonly profilService: ProfilService,
                 private readonly tokenService: TokenService) {
+
     }
 
     async detail(id: string): Promise<Credential> {               // soit {credential_id}
@@ -46,11 +52,31 @@ export class SecurityService {
         }
         try {
             const encryptedPassword: string = await encryptPassword(payload.password);
-            return this.repository.save(Builder<Credential>()
-                .username(payload.username)
-                .password(encryptedPassword)
-                .mail(payload.mail)
-                .build());
+            // Create the user account
+            const newUser = await this.repository.save(
+                Builder<Credential>()
+                    .username(payload.username)
+                    .password(encryptedPassword)
+                    .mail(payload.mail)
+                    .build()
+            );
+
+            // Automatically create a profile for the user
+            const newProfilPayload: ProfilCreatePayload = {
+                credential_id: newUser.credential_id,
+                nom: '',
+                prenom: '',
+                description: '',
+                status: '',
+                photoProfil: '',
+                email: newUser.mail,
+            };
+
+            const newProfil = await this.profilService.create(newUser, newProfilPayload);
+
+            return newUser;
+
+
         } catch (e) {
             throw new SignupException();
         }

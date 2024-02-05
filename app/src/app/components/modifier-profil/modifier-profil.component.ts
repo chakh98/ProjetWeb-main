@@ -21,6 +21,9 @@ export class ModifierProfilComponent {
 
   @Input({required: true}) config!: ProfilUpdateFormConfig;
   readonly profilService: ProfilService = inject(ProfilService);
+  ngOnInit(): void {
+    this.profilService.profilGet();
+  }
 
   Modifier() {
     const payload : ProfilPayload = {

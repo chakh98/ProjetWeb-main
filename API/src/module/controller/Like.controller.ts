@@ -32,4 +32,8 @@ export class LikeController {
     delete(@Param('id') id: string): Promise<void> {
         return this.service.delete(id);
     }
+    @Get('last-like-date')
+    getLastPublicationDate(@User() user: Credential): Promise<Date> {
+        return this.service.getLastLikeDate(user.credential_id);
+    }
 }

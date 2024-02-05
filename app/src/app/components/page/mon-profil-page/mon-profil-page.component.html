@@ -1,5 +1,25 @@
+<!-- profile.component.html -->
 <app-header></app-header>
 <div class="container">
   <div class="title">Modifie ton profil !</div>
   <app-modifier-profil [config]="config"></app-modifier-profil>
+
+  <ng-container *ngIf="profilService.Profil$() as profile">
+    <div class="middle">
+      <div class="myProfileComplet2">
+        <div class="myProfileImg">
+          <!--<img src="https://cdn-icons-png.flaticon.com/256/11172/11172308.png" alt="">-->
+          <img src="{{profile.photoProfil}}" alt="">
+        </div>
+
+        <div class="myProfileAffichage">
+          <p>Ton nom actuel : {{profile.nom}}</p>
+          <p>Ton prénom actuel : {{profile.prenom}}</p>
+          <p>Ton descriptif actuel : {{profile.description}}</p>
+          <p>Ton status actuel : {{profile.status}}</p>
+          <p>Ton Email actuel : {{profile.email}}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>

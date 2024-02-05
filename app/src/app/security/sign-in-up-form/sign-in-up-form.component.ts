@@ -53,7 +53,7 @@ export class SignInUpFormComponent implements OnInit{
               console.log("dans le navigate success");
               this.router.navigate([AppNode.AUTHENTICATED]).then();
             } else {
-              this.router.navigate(['account',AppNode.CREATE_PROFIL]).then();
+              this.router.navigate(["account/sign-in"]).then();
             }
           }
         })

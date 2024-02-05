@@ -1,0 +1,20 @@
+/* activity.component.css */
+.activity-container {
+  margin: 20px;
+}
+
+.activity-section {
+  background-color: #f8d7da; /* Rouge clair, changez-le selon vos préférences */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.activity-date {
+  color: #721c24; /* Rouge foncé, changez-le selon vos préférences */
+}

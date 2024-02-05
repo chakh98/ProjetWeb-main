@@ -1,1 +1,27 @@
-<p>dernier-mise-ajour works!</p>
+<!-- activity.component.html -->
+<div class="activity-container">
+  <div class="activity-section">
+    <h2>Activité Récente</h2>
+
+    <ng-container *ngIf="publicationService.getdate$() as date">
+      <div class="activity-item">
+        <p>Publication</p>
+        <p class="activity-date">{{ date }}</p>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="commentaireService.getdate$() as date">
+      <div class="activity-item">
+        <p>Commentaire</p>
+        <p class="activity-date">{{ date }}</p>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="likeService.getdate$() as date">
+      <div class="activity-item">
+        <p>Like</p>
+        <p class="activity-date">{{ date }}</p> <br>
+      </div>
+    </ng-container>
+  </div>
+</div>

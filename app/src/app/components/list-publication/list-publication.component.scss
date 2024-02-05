@@ -31,15 +31,18 @@
 
 .post__body {
   margin-left: 20px;
+  color: red;
 }
 
 .post__header h3 {
   margin: 0;
-  color: #333;
+  color: #f12929;
 }
 
 .post__headerDescription p {
-  margin: 10px 0;
+  margin: 30px 0;
+  color: #ff5900;
+  font-size: 30px;
 }
 
 .post__body img {
@@ -64,8 +67,8 @@
 }
 .postBox_postBoutton {
   //background-color: #45a049;
-  border: 1px black solid;
-  color: black;
+  border: 1px #f12929 solid;
+  color: #f12929;
   font-weight: 750;
   border-radius: 10px;
   width: 80px;
@@ -79,7 +82,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 15px;
-
+  font-size: 20px;
   h3{
     margin: 0;
   }

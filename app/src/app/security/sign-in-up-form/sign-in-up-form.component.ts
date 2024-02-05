@@ -1,15 +1,14 @@
 import {Component, inject, Input, OnInit, signal, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
 import {Observable, tap} from "rxjs";
-
-
+import {ApiResponse, Payload} from "@shared";
+import { SecurityService } from '../service';
+import { Router } from "@angular/router";
 import { SignInPayload } from "../data/payload";
 import { SignUpPayload } from "../data/payload/sign-up.payload";
-import { SecurityService } from "../service";
+import { AppNode } from "../../shared/routes/enum/node.enum";
 import { SignInUpFormConfig, SignInUpFormType } from "../data";
-import { ApiResponse, Payload } from "../../shared";
 
 
 @Component({
@@ -22,6 +21,7 @@ import { ApiResponse, Payload } from "../../shared";
 export class SignInUpFormComponent implements OnInit{
   @Input({required: true}) config!: SignInUpFormConfig;
   private readonly securityService: SecurityService = inject(SecurityService);
+  router: Router = inject(Router);
 
   title: string ='Connexion';
   btnLabel: string ='Se connecter';
@@ -48,12 +48,20 @@ export class SignInUpFormComponent implements OnInit{
       )
         .subscribe((data:ApiResponse) => {
           console.log('apiResponse', data);
+          if (data.result){
+            if (this.config.type === SignInUpFormType.SIGN_IN) {
+              console.log("dans le navigate success");
+              this.router.navigate([AppNode.AUTHENTICATED]).then();
+            } else {
+              this.router.navigate(['account',AppNode.CREATE_PROFIL]).then();
+            }
+          }
         })
-      // save
     } else {
-      // show error
-      this.error$.set('Formulaire non valide')
+      this.error$.set('Formulaire non valid')
     }
-
+  }
+  routeSignUp() {
+    this.router.navigate(["account", AppNode.SIGN_UP]).then();
   }
 }

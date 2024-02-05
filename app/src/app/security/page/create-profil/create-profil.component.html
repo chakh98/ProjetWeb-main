@@ -1,0 +1,21 @@
+<div class="form-container">
+  <form [formGroup]="profilForm" (ngSubmit)="createProfil()">
+    <div class="form-field">
+      <label for="nom">Nom:</label>
+      <input id="nom" type="text" formControlName="nom">
+    </div>
+    <div class="form-field">
+      <label for="prenom">Prénom:</label>
+      <input id="prenom" type="text" formControlName="prenom">
+    </div>
+    <div class="form-field">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <div class="form-field">
+      <label for="status">Status:</label>
+      <input id="status" type="text" formControlName="status">
+    </div>
+    <button type="submit">Créer le profil</button>
+  </form>
+</div>

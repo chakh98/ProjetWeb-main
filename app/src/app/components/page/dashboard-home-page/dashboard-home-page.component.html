@@ -1,0 +1,20 @@
+<app-header></app-header>
+<div class="app-container">
+
+  <div class="content-container">
+    <div class="sidebar-container">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="main-content">
+      <main>
+        <app-create-publication [config]="config"></app-create-publication>
+        <app-list-publication [config]="config"></app-list-publication>
+      </main>
+    </div>
+
+    <div class="profile-container">
+      <app-mon-profil></app-mon-profil>
+    </div>
+  </div>
+</div>

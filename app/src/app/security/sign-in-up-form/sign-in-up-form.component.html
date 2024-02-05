@@ -1,6 +1,6 @@
-<p>sign-in-up-form works!</p>
+<!-- login.component.html -->
 <div class="wrapper">
-  <div class="title">{{title}}</div>
+  <div class="title">Connexion</div>
   <div class="error" *ngIf="error$().length > 0">Vous avez {{error$().length}} erreur(s)</div>
   <div class="form" [formGroup]="config.formGroup">
     <ng-container *ngFor="let field of config.fields">
@@ -11,6 +11,7 @@
              [placeholder]="field.placeHolder"/>
     </ng-container>
 
-    <button (click)="save()">{{btnLabel}}</button>
+    <button (click)="save()">Se Connecter</button>
+    <button (click)="routeSignUp()">S'inscire</button>
   </div>
 </div>

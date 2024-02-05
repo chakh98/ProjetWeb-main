@@ -40,6 +40,6 @@ export class ProfilCreatePayload {
 
     @ApiProperty()
     @IsOptional()
-    credential: Credential
+    credential_id: string;
 
 }

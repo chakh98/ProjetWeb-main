@@ -2,6 +2,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": { // change structure des module donc misere pour changer tout ca, ce systeme arrange
+      "@root": ["app/root/index.ts"],
+      "@dashboard": ["app/components/index.ts"],
+      "@security": ["app/security/index.ts"],
+      "@member-feature": ["app/module/member/index.ts"],
+      "@shared": ["app/shared/index.ts"],
+      "@shared-ui": ["app/shared/ui/index.ts"],
+      "@api": ["app/shared/api/index.ts"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -9,13 +19,13 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,

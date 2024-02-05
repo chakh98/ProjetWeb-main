@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {FormFieldEnum, SignInUpField, SignInUpFormConfig, SignInUpFormType} from "../data";
+import {FormFieldEnum, SignInUpField, SignInUpFormConfig, SignInUpFormType,ProfilCreateFormFieldEnum} from "../data";
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,14 @@ export class SecurityFormUtilsService {
     }
   }
 
-
+  public static createProfilFormGroup(): FormGroup {
+    return new FormGroup<any>({
+      [ProfilCreateFormFieldEnum.NOM]: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+      [ProfilCreateFormFieldEnum.PRENOM]: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+      [ProfilCreateFormFieldEnum.DESCRIPTION]: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(200)]),
+      [ProfilCreateFormFieldEnum.STATUS]: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+    })
+  }
 
 
   public static getUsernameField(formGroup: FormGroup):SignInUpField {

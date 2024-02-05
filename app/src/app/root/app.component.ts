@@ -1,23 +1,16 @@
-
-import { Component } from '@angular/core';
-import { appRoutes } from "./app.routes";
-import { CreatePublicationComponent } from "../components/create-publication/create-publication.component";
-import { AppModule } from "./app.module";
-import { DashboardComponent } from "../dashboard/dashboard.component";
-import { RouterOutlet } from "@angular/router";
-import { SidebarComponent } from "../sidebar/sidebar.component";
+import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { SignInPageComponent } from "@security";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [
-    DashboardComponent,
-    AppModule,
-    RouterOutlet,
-    SidebarComponent,
-  ]
+  imports: [CommonModule, RouterOutlet, SignInPageComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+
 }

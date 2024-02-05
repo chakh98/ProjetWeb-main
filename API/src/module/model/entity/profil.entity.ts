@@ -4,11 +4,15 @@ import {ulid} from "ulid";
 import {Address} from "@common/model";
 import {isNil} from "lodash";
 import { Credential } from "../../../security";
+import {
+    PrimaryGeneratedColumn
+} from "typeorm";
+
 
 
 @Entity()
 export class Profil extends BaseEntity {
-    @PrimaryColumn('varchar', {length: 26, default: () => `'${ulid()}'`})
+    @PrimaryGeneratedColumn("uuid")
     idProfil: string;
 
     @Column({length: 50, nullable: true})
@@ -29,8 +33,9 @@ export class Profil extends BaseEntity {
     @Column({length: 34, nullable: true})
     email: string;
 
-    @OneToOne(() => Credential, {cascade: true, eager: true})
-    @JoinColumn({referencedColumnName: 'credential_id', name: 'credential_id_fk'})
-    credential: Credential;
+    @OneToOne(() => Credential, {eager: true})
+    @JoinColumn({referencedColumnName: 'credential_id', name: 'credential_id'})
+    credential_id: string;
+
 
 }

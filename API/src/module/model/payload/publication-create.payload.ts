@@ -1,7 +1,6 @@
-import {IsArray, IsBoolean, IsDate, IsEmail, IsOptional, IsString, Length} from "class-validator";
+import {IsOptional, IsString, Length} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
-import {Address} from "@common/model";
-import {Profil} from "../entity/profil.entity";
+import {Credential} from "../../../security";
 
 export class PublicationCreatePayload {
     @ApiProperty()
@@ -17,6 +16,6 @@ export class PublicationCreatePayload {
 
     @ApiProperty()
     @IsOptional()
-    profile: Profil;
+    utilisateur: Credential
 
 }

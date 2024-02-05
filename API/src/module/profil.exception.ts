@@ -16,12 +16,27 @@ export class ProfilListException extends ApiException {
         super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
     }
 }
+export class ProfilUpdateException extends ApiException {
+    constructor() {
+        super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
+    }
+}
+export class ProfilDeleteException extends ApiException {
+    constructor() {
+        super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
+    }
+}
 export class PublicationCreateException extends ApiException {
     constructor() {
         super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
     }
 }
 export class PublicationNotFoundException extends ApiException {
+    constructor() {
+        super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
+    }
+}
+export class PublicationDeleteException extends ApiException {
     constructor() {
         super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
     }
@@ -46,12 +61,22 @@ export class CommentaireListException extends ApiException {
         super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
     }
 }
+export class CommentaireDeleteException extends ApiException {
+    constructor() {
+        super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
+    }
+}
 export class LikeCreateException extends ApiException {
     constructor() {
         super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
     }
 }
 export class LikeNotFoundException extends ApiException {
+    constructor() {
+        super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
+    }
+}
+export class LikeDeleteException extends ApiException {
     constructor() {
         super(ApiCodeResponse.MEMBER_CREATE_EXCEPTION, 401);
     }

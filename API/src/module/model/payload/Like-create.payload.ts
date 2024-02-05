@@ -1,20 +1,16 @@
 import {IsArray, IsBoolean, IsDate, IsEmail, IsOptional, IsString, Length} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
-import {Address} from "@common/model";
-import {Profil} from "../entity/profil.entity";
-import {Publication} from "../entity/publication.entity";
-import {Commentaire} from "../entity/commentaire.entity";
 
 export class LikeCreatePayload {
     @ApiProperty()
     @IsOptional()
-    profil: Profil;
+    credential_id: string;
 
     @ApiProperty()
     @IsOptional()
-    publication: Publication;
+    idPublication: string;
 
     @ApiProperty()
     @IsOptional()
-    commentaire: Commentaire;
+    idCommentaire: string;
 }

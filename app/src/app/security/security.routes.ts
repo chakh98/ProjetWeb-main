@@ -1,5 +1,6 @@
 import {Routes} from "@angular/router";
 import { AppNode } from "../shared/routes/enum/node.enum";
+import { CreateProfilComponent } from "./page/create-profil/create-profil.component";
 
 
 
@@ -23,6 +24,10 @@ export const securityRoutes: Routes = [
       {
         path: AppNode.SIGN_UP,
         loadComponent: () => import('./page').then(c => c.SignUpPageComponent)
+      },
+      {
+        path: AppNode.CREATE_PROFIL,
+        loadComponent: () => import('./page').then(c => c.CreateProfilComponent)
       },
 
       {

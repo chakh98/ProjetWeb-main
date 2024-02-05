@@ -1,13 +1,20 @@
-import {Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn} from "typeorm";
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
 import {BaseEntity} from "@common/model/entity/base.entity";
-import {ulid} from "ulid";
+import {Commentaire} from "./commentaire.entity";
+import { Like } from "./Like.entity";
 import { Credential } from "../../../security";
-import {Profil} from "./profil.entity";
 
 
 @Entity()
 export class Publication extends BaseEntity {
-    @PrimaryColumn('varchar', {length: 26, default: () => `'${ulid()}'`})
+    @PrimaryGeneratedColumn("uuid")
     idPublication: string;
 
     @Column({length: 200, nullable: true})
@@ -16,8 +23,13 @@ export class Publication extends BaseEntity {
     @Column({length: 50, nullable: true})
     typePublication: string;
 
-    @OneToOne(() => Profil, {cascade: true, eager: true})
-    @JoinColumn({referencedColumnName: 'idProfil', name: 'idProfil_fk'})
-    profile: Profil;
+    @ManyToOne(() => Credential, {eager:true})
+    @JoinColumn({referencedColumnName:'credential_id', name:'credential_id'})
+    credential_id: string
 
+    @OneToMany(()=>Commentaire, (commentaire)=> commentaire.credential_id, {cascade:true,eager:false})
+    commentaires:Commentaire[];
+
+    @OneToMany(()=>Like, (like)=> like.credential_id, {cascade:true,eager:false})
+    likes:Like[];
 }

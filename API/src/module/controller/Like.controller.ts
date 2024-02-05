@@ -1,8 +1,10 @@
-import {Body, Controller, Get, Param, Post} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {Like} from "../model/entity";
 import {LikeCreatePayload} from "../model/payload/Like-create.payload";
 import {LikeService} from "../service/Like.service";
+import {Credential} from "../../security";
+import { User } from "@common/config";
 
 @ApiBearerAuth('access-token')
 @ApiTags('Like')
@@ -10,9 +12,9 @@ import {LikeService} from "../service/Like.service";
 export class LikeController {
     constructor(private readonly service: LikeService) {
     }
-    @Post('create')
-    create(@Body() payload: LikeCreatePayload): Promise<Like> {
-        return this.service.create(payload);
+    @Post('/')
+    create(@User() utilisateur: Credential,@Body() payload: LikeCreatePayload): Promise<Like> {
+        return this.service.like(utilisateur, payload);
     }
     @Get('detail/:id')
     detail(@Param('id') id: string): Promise<Like> {
@@ -22,5 +24,12 @@ export class LikeController {
     getAll(): Promise<Like[]> {
         return this.service.getAll();
     }
-
+    @Get('list/:idPublication')
+    getAllByIdPublication(@Param('idPublication') idPublication: string): Promise<Like[]> {
+        return this.service.getAllByIdPublication(idPublication);
+    }
+    @Delete('delete/:id')
+    delete(@Param('id') id: string): Promise<void> {
+        return this.service.delete(id);
+    }
 }

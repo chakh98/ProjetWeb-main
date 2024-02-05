@@ -1,0 +1,14 @@
+<!-- login.component.html -->
+<div class="wrapper">
+  <div class="title">Mon Profil</div>
+  <div class="form" [formGroup]="config.formGroup">
+    <ng-container *ngFor="let field of config.fields">
+      <label>{{field.label}}</label>
+      <input [type]="field.inputType"
+             [formControl]="field.control"
+             autocomplete="false"
+             [placeholder]="field.placeHolder"/>
+    </ng-container>
+    <button (click)="Modifier()">Changer les données</button>
+  </div>
+</div>

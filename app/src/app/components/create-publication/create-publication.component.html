@@ -1,12 +1,8 @@
-<form (submit)="createPublication()">
-  <input type="text" #content placeholder="Écrit ici?">
-  <button type="poster">Post</button>
-</form>
-<div *ngFor="let comment of comments" class="commente">
-  {{ comment }}
+<div class="postBox" [formGroup]="config.formGroup">
+  <div class="postbox_input">
+    <ng-container *ngFor="let field of config.fields">
+      <input [type]="field.inputType" [formControl]="field.control" [placeholder]="field.placeHolder">
+    </ng-container>
+  </div>
+  <button class="postBox_postBoutton" (click)="save()">Poster</button>
 </div>
-<form (submit)="addComment(commentText.value)">
-  <input type="text" #commentText placeholder="Ajoute un commentaire">
-  <button type="poster">Comment</button>
-
-</form>

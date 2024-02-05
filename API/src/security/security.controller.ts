@@ -13,6 +13,7 @@ import { Credential} from "./model";
 export class SecurityController {
     constructor(private readonly service: SecurityService) {}
 
+    // ici Post = demande d'information par un @Body (car information sensible, sans body lien = /account/signin?username=username&pass...)
     @Public()
     @Post('signin')
     public signIn(@Body() payload: SignInPayload) {

@@ -6,25 +6,22 @@ import {Repository} from "typeorm";
 import {ProfilCreatePayload} from "../model/payload/profil-create.payload";
 import {Builder} from "builder-pattern";
 import {
-    CommentaireCreateException, CommentaireListException, CommentaireNotFoundException,
-    ProfilCreateException,
-    ProfilListException,
-    ProfilNotFoundException
+    CommentaireCreateException, CommentaireListException, CommentaireNotFoundException, CommentaireDeleteException,
 } from "../profil.exception";
 import {isNil} from "lodash";
 import {CommentaireCreatePayload} from "../model/payload/commentaire-create.payload";
+import {Credential} from "../../security";
 
 @Injectable()
 export class CommentaireService {
     constructor(@InjectRepository(Commentaire) private readonly repository: Repository<Commentaire>) {}
-    async create(payload: CommentaireCreatePayload): Promise<Commentaire> {
+    async create(user: Credential, payload: CommentaireCreatePayload): Promise<Commentaire> {
         try {
-            const newCommentaire = Object.assign(new Commentaire(), Builder<Commentaire>()
+            return await this.repository.save(Builder<Commentaire>()
                 .contenu(payload.contenu)
-                .profil(payload.profil)
-                .publication(payload.publication)
+                .credential_id(user.credential_id)
+                .idPublication(payload.idPublication)
                 .build());
-            return await this.repository.save(newCommentaire);
         } catch (e) {
             throw new CommentaireCreateException();
         }
@@ -43,4 +40,36 @@ export class CommentaireService {
         } catch (e) {
             throw new CommentaireListException();
         }
-    }}
+    }
+    async getAllById(idPublication: string): Promise<Commentaire[]> {
+        try {
+            return await this.repository.find({ where: { idPublication } });
+        } catch (e) {
+            throw new CommentaireListException();
+        }
+    }
+
+    async delete(id: string): Promise<void> {
+        try {
+            const detail = await this.detail(id);
+            await this.repository.remove(detail);
+        } catch (e) {
+            throw new CommentaireDeleteException();
+        }
+    }
+    async getCount(userId: string): Promise<number> {
+        return this.repository.count({ where: { credential_id: userId } });
+    }
+    async getLastCommentDate(userId: string): Promise<Date> {
+        const lastComment = await this.repository.findOne({
+            where: { credential_id: userId },
+            order: { created: 'DESC' }
+        });
+
+        if (!lastComment) {
+            throw new CommentaireNotFoundException();
+        }
+
+        return lastComment.created;
+    }
+}

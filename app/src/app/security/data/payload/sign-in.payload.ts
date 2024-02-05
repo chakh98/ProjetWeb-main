@@ -1,4 +1,4 @@
-import { Payload } from "../../../shared/model/business";
+import { Payload } from "@shared";
 
 
 export interface SignInPayload extends Payload{

@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {environment} from "../../../../environment/environment";
 import {catchError, map, Observable, of} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {ApiResponse} from "../data/api.response";
+import {ApiResponse} from "@shared";
 
 @Injectable({
   providedIn: 'root'

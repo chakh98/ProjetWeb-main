@@ -38,11 +38,6 @@ export class SecurityService {
         throw new UserNotFoundException();
     }
 
-
-
-
-
-    //
     async signup(payload: SignupPayload): Promise<Credential | null> {
         const result: Credential | null = await this.repository.findOneBy({username: payload.username});
 

@@ -1,0 +1,53 @@
+<ng-container>
+  <div class="post" *ngFor="let publication of publicationService.list$().reverse()">
+    <button class="post__deleteButton" (click)="supprimerPublication(String(publication.idPublication))">
+      <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt="Supprimer" >
+    </button>
+
+    <div class="post__avatar">
+      <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt=""/>
+    </div>
+
+    <div class="post__body">
+      <div class="post__header">
+        <div class="post__headerText">
+          <h3>{{publication.credential_id.username}}</h3>
+          <span>Publié à {{ publication.created | date:'dd-MM-yyyy HH:mm' }}</span>
+        </div>
+        <div class="post__headerDescription">
+          <p>{{publication.contenu}}</p>
+        </div>
+      </div>
+      <div class="post__footer">
+        <a (click)="LikePublication(publication.idPublication)"  >
+          <img src="https://cdn-icons-png.flaticon.com/128/10307/10307920.png" alt="Like">
+        </a>
+        <a (click)="voirCommentaire(publication.idPublication)">
+          <img src="https://cdn-icons-png.flaticon.com/128/4081/4081342.png" alt="Comment">
+        </a>
+
+      </div>
+
+      <div *ngIf="selectedPublicationId === publication.idPublication">
+        <ng-container *ngFor="let commentaire of commentaireService.listComs$()">
+          <div class="publicationCommentaire">
+            <div class="publicationCommentaireInfo">
+              <p>{{commentaire.idCommentaire}}</p>
+              <span>Publié à {{ commentaire.created | date:'dd-MM-yyyy HH:mm' }}</span>
+            </div>
+            <p>{{commentaire.contenu}}</p>
+          </div>
+        </ng-container>
+
+        <div class="repondreCommentaire" [formGroup]="config.formGroup">
+          <div class="repondreCommentaireInput">
+            <ng-container *ngFor="let field of config.fields">
+              <input type="text" placeholder="Répondre à la publication" [formControl]="field.control">
+            </ng-container>
+          </div>
+          <button class="Répondre" (click)="Commenter(publication.idPublication)">Répondre</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

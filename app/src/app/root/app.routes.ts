@@ -1,17 +1,29 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import {DashboardGuard} from "../security/guard/dashboard.guard";
+import {AppNode} from "../shared/routes/enum/node.enum";
 
-
-export const appRoutes: Routes = [
-  { path: 'dashboard', component: AppComponent } ,
+export const routes: Routes = [
 
   {
-    path: 'Publication',
-    loadComponent: () => import('../components/create-publication/create-publication.component').then(r => r.CreatePublicationComponent)
+    path: '',
+    redirectTo: AppNode.PUBLIC, pathMatch: 'full'
   },
+
   {
-    path: 'Comment',
-    loadComponent: () => import('../components/publication/comment-section.component').then(r => r.CommentSectionComponent)
+    path: AppNode.PUBLIC,
+    loadChildren: () => import('@security').then(r => r.securityRoutes)
   },
+
+  {
+    path: AppNode.AUTHENTICATED,
+    canActivate: [DashboardGuard()],
+    loadChildren: () => import('@dashboard').then(r => r.dashboardRoutes)
+  },
+
+  {
+    path: AppNode.FALL_BACK,
+    loadComponent: () => import('../shared/routes/global-fall-back-page/global-fall-back-page.component').then(r => r.GlobalFallBackPageComponent)
+  },
+
+
 ];
-

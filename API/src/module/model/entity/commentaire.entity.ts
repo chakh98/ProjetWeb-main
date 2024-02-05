@@ -1,27 +1,39 @@
-import {BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn} from "typeorm";
+import {
+    BeforeInsert,
+    Column,
+    Entity,
+    JoinColumn, ManyToOne,
+    OneToMany,
+    OneToOne,
+    PrimaryColumn,
+    PrimaryGeneratedColumn
+} from "typeorm";
 import {BaseEntity} from "@common/model/entity/base.entity";
 import {ulid} from "ulid";
 import {Address} from "@common/model";
 import {isNil} from "lodash";
 import { Credential } from "../../../security";
-import {Profil} from "./profil.entity";
 import {Publication} from "./publication.entity";
+import { Like } from "./Like.entity";
 
 
 @Entity()
 export class Commentaire extends BaseEntity {
-    @PrimaryColumn('varchar', {length: 26, default: () => `'${ulid()}'`})
+    @PrimaryGeneratedColumn("uuid")
     idCommentaire: string;
 
     @Column({length: 50, nullable: true})
     contenu: string;
 
-    @OneToOne(() => Profil, {cascade: true, eager: true})
-    @JoinColumn({referencedColumnName: 'idProfil', name: 'idProfil_fk'})
-    profil: Profil;
+    @ManyToOne(() => Publication, {cascade: true, eager: true})
+    @JoinColumn({referencedColumnName: 'idPublication', name: 'idPublication'})
+    idPublication: string;
 
-    @OneToOne(() => Publication, {cascade: true, eager: true})
-    @JoinColumn({referencedColumnName: 'idPublication', name: 'idPublication_fk'})
-    publication: Publication;
+    @ManyToOne(() => Credential, (credential) => credential.commentaires, {eager:false})
+    @JoinColumn({referencedColumnName:'credential_id', name:'credential_id'})
+    credential_id: string
 
+    @OneToMany(
+        ()=>Like, (like)=> like.credential_id, {cascade:true,eager:false})
+    likes:Like[];
 }

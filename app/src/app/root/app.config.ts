@@ -1,10 +1,17 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {provideRouter, withComponentInputBinding} from '@angular/router';
 
-import { appRoutes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
-
+import { routes } from './app.routes';
+import {HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
+import {HttpInterceptor} from "../shared/api/service/http.interceptor.service";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(appRoutes), provideClientHydration()]
+  providers: [
+    provideRouter(routes, withComponentInputBinding()),
+    importProvidersFrom(HttpClientModule),
+    provideHttpClient(
+      withInterceptors([HttpInterceptor])
+    )
+  ]
 };
+

@@ -9,10 +9,13 @@ import {ProfilService} from "./service/profil.service";
 import {PublicationService} from "./service/publication.service";
 import {CommentaireService} from "./service/commentaire.service";
 import {LikeService} from "./service/Like.service";
+import { SecurityController, Token, TokenService } from "../security";
+import { SecurityService } from "../security/service/security.service";
+import {Credential} from "../security";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Profil, Publication, Commentaire, Like])],
-    controllers: [ProfilController, PublicationController, CommentaireController, LikeController],
-    providers: [ProfilService, PublicationService, CommentaireService, LikeService]
+    controllers: [CommentaireController, LikeController, ProfilController, PublicationController, SecurityController],
+    imports: [TypeOrmModule.forFeature([Commentaire, Credential, Like, Profil, Publication, Token])],
+    providers: [CommentaireService, LikeService, ProfilService, PublicationService, SecurityService, TokenService],
 })
 export class ProfileModule {}

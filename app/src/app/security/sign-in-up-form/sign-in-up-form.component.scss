@@ -1,20 +1,62 @@
-.wrapper{
+/* login.component.scss */
+.wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-height: 80vh;
-  .form{
+
+  .form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+    padding: 20px;
+    border: 1px solid #e74c3c; /* Couleur rouge */
+    border-radius: 8px;
+    background-color: #fff; /* Fond blanc */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Légère ombre */
   }
 }
 
-.error{
-  border: 1px solid red;
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e74c3c; /* Couleur rouge pour le titre */
+}
+
+.error {
+  border: 1px solid #e74c3c; /* Couleur rouge pour la bordure */
   padding: 1rem;
-  color: red;
+  color: #e74c3c; /* Couleur rouge pour le texte */
   margin-bottom: 25px;
+}
+
+.form label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form button {
+  background-color: #e74c3c; /* Couleur rouge pour le bouton */
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #c0392b; /* Couleur rouge plus foncée au survol */
+  }
 }

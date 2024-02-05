@@ -10,6 +10,7 @@ import {ApiInterceptor} from "@common/api";
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(configManager.getValue(ConfigKey.APP_BASE_URL));
+  app.enableCors();
   swaggerConfiguration.config(app);
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ApiInterceptor());
